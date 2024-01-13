@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,600;6..12,800&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+/* For WebKit browsers (Chrome, Safari) */
+/* This will style both the track and the thumb of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* color of the thumb */
+  /* border-radius: 6px;  */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* color of the track */
+}
+body {
+ 
+  margin: 0 auto;
+
+}
+img {
+  object-fit: cover;
+}
+
+
+.appp {
+  width: 100%;
+   justify-content: center;
+  display: flex;
+transition: all 0.5s ease-in-out;
+  background: hsl(0, 0%, 98%);
+}
+.appp.darkmode {
+ background-color: hsl(208.7deg 26.44% 17.06%); 
+}
+html {
+  scrollbar-color: #888 #f1f1f1; /* thumb and track color */
+  scrollbar-width: thin; /* width of the scrollbar */
+}
+.header {
+    width: 100%;
+    display: flex;
+    max-width: 1700px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    padding: 20px 5%;
+     transition: all 0.5s ease-in-out;
+    justify-content: space-between;
+      --bgcolor: var(--White);
+      position: absolute;
+  background-color: var(--bgcolor);
+}
+.header.darkmode {
+     --bgcolor: var(--Dark-Blue);
+}
+.header.darkmode h1 {
+      --h1color: var(--White);
+}
+.header.darkmode button {
+  --scolor: var(--White);
+}
+
+
+
+/* home */
+.home {
+  min-height: 100dvh;
+  width: 100%;
+   max-width: 1700px;
+  padding: 130px 5% 40px 5%;
+
+  --bghome: var(--Very-light-gray);
+  background-color: var(--bghome);
+   transition: all 0.5s ease-in-out;
+}
+#ho_me.darkmode {
+   --bghome: var(--hm-bg);
+     --nfound: var(--White);
+     --bodyColor: black;
+
+}
+
+.dt {
+  min-height: 100dvh;
+  width: 100%;
+   --dthome: var(--Very-light-gray);
+  padding: 130px 5% 40px 5%;
+  background-color: var(--dthome);
+  transition: all 0.5s ease-in;
+}
+.dt.darkmode {
+--dthome: var(--hm-bg);
+}
+.dt.darkmode #button, .nfound.darkmode #button {
+  --bthome: var(--Dark-Blue);
+  --btcolor: var(--White);
+}
+:root {
+  --nfound: var(--lightmode-Blue);
+  --new: hsl(200, 15%, 8%);
+  --bodyColor: hsl(0, 0%, 98%);
+}
+#button {
+  --bthome: var(--White);
+  --btcolor: var(--lightmode-Blue);
+ display: flex;
+ height: 3em;
+ width: 100px;
+ align-items: center;
+ justify-content: center;
+  background-color: var(--bthome);
+ border-radius: 3px;
+ font-weight: 600;
+ letter-spacing: 1px;
+ transition: all 0.2s linear;
+ cursor: pointer;
+ border: none;
+ box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+ color: var(--btcolor);
+}
+
+#button > svg {
+ margin-right: 5px;
+ margin-left: 5px;
+ font-size: 20px;
+ transition: all 0.4s ease-in;
+}
+.dt.darkmode #button > .red-svg {
+   
+  fill: #fff;
+
+}
+.dt #button > .red-svg {
+   
+  
+  fill: var(--lightmode-Blue);
+
+}
+#button:hover > svg {
+ font-size: 1.2em;
+ transform: translateX(-5px);
+}
+
+#button:hover {
+box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+ transform: translateY(-2px);
+}
+#button span {
+  transition: all 0.01s ease-in;
+}
+#not_found h1 {
+  color: var(--nfound);
+  font-size: 2rem;
+}
+#not_found {
+  width: 100%;
+  /* border: 1px solid red; */
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nfound {
+  --ncol: var(--Very-light-gray);
+  background-color: var(--ncol);
+  display: flex;
+  min-height: 100dvh;
+   max-width: 1700px;
+  align-items: center;
+  padding: 100px 5% 40px 5%;
+  /* height: 100dvh; */
+  transition: all 0.5s ease-in-out;
+  gap: 20px 0;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  justify-content: center;
+}
+.nfound.darkmode{
+   --ncol: var(--hm-bg);
+    --new: hsl(0, 0%, 100%);
+  
+}
+#nfound img {
+  width: clamp(200px, 15%, 300px)
+}
+#nfound p, #nfound h2  {
+  color: var(--new);
+  text-align:center;
+}
+#btn{
+  background: #fbca1f;
+  font-family: inherit;
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em;
+  cursor: pointer;
+}
+
+#btn:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+#btn:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
+}
+
+@media screen and (max-width: 500px) {
+  .home{
+    padding-top: 100px
+  }
+  #not_found {
+    padding-top: 30px;
+  }
+  #not_found h1 {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 250px) {
+#nfound img {
+  width: 80%;
+}
+}

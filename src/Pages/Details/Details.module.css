@@ -8,3 +8,10 @@
     width: 100%;
     padding-bottom: 60px;
 }
+
+@media screen and (max-width: 500px) {
+    .btn_div {
+    padding-bottom: 30px;
+}
+
+}

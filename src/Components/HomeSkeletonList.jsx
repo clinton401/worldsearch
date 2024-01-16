@@ -13,6 +13,7 @@ function HomeSkeletonList({theme}) {
           <Skeleton type="text" />
           <Skeleton type="text" />
           <Skeleton type="text" />
+          <Skeleton type="btn" />
         </div>
       </div>
       <Shimmer/>

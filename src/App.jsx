@@ -19,29 +19,27 @@ function App() {
    });
   const fetchData = async () => {
     try {
-      const response = await fetch('https://restcountries.com/v3.1/all');
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setData(jsonResponse);
-        setShow(true)
-        setActive(true);
-        setErrors(true);
+      const response = await fetch("https://restcountries.com/v3.1/all");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      else {
-
-        setShow(false);
-        setErrors(false);
-
-        setActive(false);
-        
-      }
+      const jsonResponse = await response.json();
+      setData(jsonResponse);
+      setShow(true);
+      setActive(true);
+      setErrors(true);
     } catch (error) {
-      console.log(error)
+      console.error("Fetch error:", error.message);
+      setShow(false);
+      setErrors(false);
+      setActive(false);
     }
-  }
+  };
+
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
+
 
   useEffect(() => {
      window.localStorage.setItem("mode", JSON.stringify(lightMode))

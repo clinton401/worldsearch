@@ -1,8 +1,12 @@
 .skeleton {
     background-color: #ddd;
-    /* margin: 10px 0; */
     transition: all 0.5s ease-in-out;
     border-radius: 4px;
+}
+.skeleton.btn {
+    height: 3em;
+ min-width: 100px;
+    margin: 10px 0;
 }
 .skeleton.text {
     width: 100%;
@@ -82,6 +86,8 @@
     cursor: pointer;
     transform: translateY(-50%);
     font-size: 1rem;
+    outline-offset: 4px;
+
     color: hsl(0, 0%, 98%);
     right: 0;
  }

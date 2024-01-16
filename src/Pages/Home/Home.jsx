@@ -8,7 +8,7 @@ import Input from "../../Components/Input";
 import ReactPaginate from "react-paginate";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 const rightAnimation = {
   hidden: {
     x: 500,
@@ -85,13 +85,13 @@ function Home() {
       setPageCount(Math.ceil(data.length / itemsPerPage));
     }
   }, [itemOffset, itemsPerPage, data]);
-
+ 
   const handlePageClick = (event) => {
     // setActive(false)
     // setTimeout(() => {
+    scrollToTop();
        const newOffset = (event.selected * itemsPerPage) % data.length;
 
-       console.log(event);
        setItemOffset(newOffset);
        
     // }, 1000);

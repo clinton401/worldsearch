@@ -7,13 +7,13 @@ import InputSkeleton from "../../Components/InputSkeleton";
 import Input from "../../Components/Input";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 function Home() {
   const [noC, setNoC] = useState(false);
   const [newData, setNewData] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
-  const itemsPerPage = 35;
+  const itemsPerPage = 30;
 
   const {
     lightMode,
@@ -35,7 +35,6 @@ function Home() {
     }
   }
   numHandler();
-console.log({show, active, noC})
   useEffect(() => {
     if (data) {
       const endOffset = itemOffset + itemsPerPage;

@@ -4,6 +4,7 @@ import "./components.css";
 export const numberWithCommas = (number) => {
   return number.toLocaleString();
 };
+
 function Card({
   name,
   image,

@@ -66,14 +66,17 @@
  }
 .skeleton-list-search input {
     background: transparent;
-   
+  
     border: none;
     padding-left: 5%;
     font-weight: 600;
     padding-right: 10%;
     color: hsl(200, 15%, 8%);
 }
-.skeleton-list-search.dark input, .skeleton-list-search.dark #search,  .skeleton-list-search.dark input::placeholder, .skeleton-list-filter.dark select{
+.skeleton-list-search input:focus {
+ outline: 1px solid hsl(200, 15%, 8%);
+}
+.skeleton-list-search.dark input, .skeleton-list-search.dark #search,  .skeleton-list-search.dark input::placeholder, .skeleton-list-filter.dark select, .input_elements.dark{
     color: #fff;
 }
  #search-btn {
@@ -86,7 +89,7 @@
     cursor: pointer;
     transform: translateY(-50%);
     font-size: 1rem;
-    outline-offset: 4px;
+    outline-offset: 0;
 
     color: hsl(0, 0%, 98%);
     right: 0;
@@ -109,7 +112,7 @@
 }
  /* home  */ 
 .skeleton-wrapper {
-   width: clamp(200px, 22%, 500px);
+   width: clamp(230px, 22%, 500px);
    padding-bottom: 30px;
    overflow: hidden;
    padding-top: 0;
@@ -119,13 +122,13 @@
    transition: all 0.5s ease-in-out;
    margin-bottom: 60px;
 }
-.skeleton-wrapper.light, .skeleton-list-filter.light, .skeleton-list-search.light, .details-div.light {
+.skeleton-wrapper.light, .skeleton-list-filter.light, .skeleton-list-search.light, .details-div.light, .input_elements.light {
     background-color: hsl(0, 0%, 100%);
 }
  .details-div2 {
     background-color: transparent;
  }
-.skeleton-wrapper.dark, .skeleton-list-filter.dark, .skeleton-list-search.dark , .details-div.dark {
+.skeleton-wrapper.dark, .skeleton-list-filter.dark, .skeleton-list-search.dark , .details-div.dark, .input_elements.dark {
     background-color: hsl(209, 23%, 22%);
 }
 .skeleton-wrapper.dark .skeleton, .details-div2.dark .skeleton {
@@ -357,6 +360,39 @@ outline: 1px solid black;
 #dmain-section  #button {
  color: var(--secondColor)
 }
+#sk_search {
+    overflow: visible;
+}
+.input_elements {
+    position: absolute;
+    z-index: 2000;
+    top: 105%;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+}
+.input_elements * {
+    transition: all 0.3s ease-in-out;
+
+}
+.input_elements.dark li {
+    border: 1px solid hsl(208.7deg 26.44% 17.06%);
+}
+.input_elements.light li:hover, .input_elements li:focus {
+    color: #ffff
+}
+.input_elements li:hover, .input_elements li:focus {
+    background-color:  hsl(200, 15%, 8%);
+    border: 1px solid hsl(200, 15%, 8%);
+    
+}
+.input_elements li {
+    list-style: none;
+    outline: none;
+    font-weight: 600;
+    padding: 15px 5%;
+    cursor: pointer;
+    border: 1px solid #d3d3d3;
+}
 /* .dmain-div2  */
  @keyframes loading {
     0% {
@@ -433,7 +469,7 @@ outline: 1px solid black;
  }
  @media screen and (max-width: 500px) {
     .skeleton-wrapper {
-        width: 90%
+        width: 100%
     }
     .dmain-div2 h2 {
         font-size: 1.5rem

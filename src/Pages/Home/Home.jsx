@@ -23,6 +23,12 @@ const rightAnimation = {
     },
   },
 };
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
 function Home() {
   const [noC, setNoC] = useState(false);
   const [newData, setNewData] = useState([]);
@@ -68,12 +74,7 @@ function Home() {
   }, []);
 
   // Function to scroll to the top when the button is clicked
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  
   useEffect(() => {
     if (data) {
       const endOffset = itemOffset + itemsPerPage;

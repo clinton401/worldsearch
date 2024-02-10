@@ -2,6 +2,7 @@ import React, { useContext,  } from "react";
 import { myContext } from "../../App";
 import error from "../../assets/oops.png";
 import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../Home/Home";
 
 function NotFound() {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ function NotFound() {
       </p>
       <button id="btn" onClick={() => {
         navigate(`/`)
+        scrollToTop()
       }}>GO TO HOMEPAGE</button>
     </section>
   );

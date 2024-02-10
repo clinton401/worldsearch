@@ -1,44 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "./components.css";
 import { useNavigate } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+import { scrollToTop } from "../Pages/Home/Home";
 function Input({ theme, setData, setActive, setNoC }) {
   const [inputValue, setInputValue] = useState("");
   const [selectedValue, setSelectedValue] = useState("all");
   const [inputElements, setInputElements] = useState([]);
+
   const navigate = useNavigate();
   const newElement = useRef();
-  // useEffect(() => {
-  //   let increment = -1; // Move the increment variable outside the useEffect
-  //   const handleKeyDown = (event) => {
-  //     if (event.key === "ArrowDown") {
-  //       if (inputElements.length >= 1 && newElement.current) {
-  //         const childNodes = newElement.current.childNodes;
-  //         if (childNodes.length >= 1) {
-  //           const ChildElement = firstChildNode.childNodes;
-  //           if (increment < 4) {
-  //             // Change condition to prevent out-of-bounds access
-  //             increment++;
-  //           } else {
-  //             increment = 0;
-  //           }
-  //           ChildElement[increment].focus();
-  //           alert(increment);
-  //         }
-  //       }
-  //     }
-  //   };
-
-  //   // Add event listener only once
-  //   window.addEventListener("keydown", handleKeyDown);
-
-  //   // Remove event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [inputElements, newElement]);
 
   const handleInputChange = async (event) => {
     event.preventDefault();
@@ -59,16 +31,19 @@ function Input({ theme, setData, setActive, setNoC }) {
             );
             const filter2 = filteredCountries.filter(
               (fc) => {
-                console.log(
-                  fc.name.common.toLowerCase().includes(value.toLowerCase())
-                );
+                 const valueLength = value.length;
+                 const fcName = fc.name.common
+                   .substring(0, valueLength)
+                   .toLowerCase();
+                 const substring = value.toLowerCase();
                 // console.log(fc.name.common.toLowerCase());
-            return  fc.name.common.toLowerCase().includes(value.toLowerCase())
+            return fcName === substring;
               }
             );
-            console.log(filter2);
+            
             const slicedResponse = filter2.slice(0, 5);
             setInputElements(slicedResponse);
+
           } else {
             setInputElements([]);
           }
@@ -80,7 +55,15 @@ function Input({ theme, setData, setActive, setNoC }) {
           const response = await fetch(urlToFetch);
           if (response.ok) {
             const jsonResponse = await response.json();
-            const slicedResponse = jsonResponse.slice(0, 5);
+             const filter2 = jsonResponse.filter((fc) => {
+               const valueLength = value.length;
+               const fcName = fc.name.common
+                 .substring(0, valueLength)
+                 .toLowerCase();
+               const substring = value.toLowerCase();
+               return fcName === substring;
+             });
+            const slicedResponse = filter2.slice(0, 5);
             setInputElements(slicedResponse);
           } else {
             setInputElements([]);
@@ -91,68 +74,25 @@ function Input({ theme, setData, setActive, setNoC }) {
       }
     } else {
       setInputElements([]);
+
     }
    
   };
   function liRouteHandler(routeLocation) {
     navigate(`/country/${routeLocation}`);
+    scrollToTop()
   }
+
   useEffect(() => {
-          const root = createRoot(newElement.current);
+  if(inputElements.length > 0 ) {
+    window.addEventListener('click', () => {
+       setInputElements([]);
 
-    if (inputElements.length > 0) {
-    
-        Promise.resolve().then(() => {
-        const elements = inputElements.map((inputElement) => {
-          const elementName = inputElement.name.common;
-                  const elementCountry = inputElement.cca3;
-
-          return (
-            <li
-              key={elementName}
-              onClick={() => liRouteHandler(elementCountry)}
-              tabIndex="0"
-            >
-              {elementName}
-            </li>
-          );
-        });
-
-        root.render(<ul className={`input_elements ${theme}`}>{elements}</ul>);
-      });
-    }
-
-    // Schedule the unmounting in the next microtask
-    return () => {
-      if (newElement) {
-        Promise.resolve().then(() => {
-
-          // const root = createRoot(newElement.current);
-          root.unmount();
-        })
-      }
-    }
-  }, [inputElements]);
-  useEffect(() => {
-    if (newElement) {
-      window.addEventListener('click', () => {
-                  const root = createRoot(newElement.current);
-
-        //  Promise.resolve().then(() => {
-        root.unmount();
-        //  });
-      
-      })
-    }
-  }, [inputElements])
+ })
+  }
+}, [inputElements])
   async function searchHandler(event) {
-    if (newElement) {
-      
-      //  Promise.resolve().then(() => {
-      const root = createRoot(newElement.current);
-      root.unmount();
-      //  });
-    }
+    setInputElements([]);
     event.preventDefault();
     setActive(false);
     const urlToFetch = `https://restcountries.com/v3.1/name/${inputValue}`;
@@ -268,7 +208,6 @@ function Input({ theme, setData, setActive, setNoC }) {
       }
     }
   };
-
   return (
     <>
       <div className={`skeleton-list-search ${theme}`} id="sk_search">
@@ -285,9 +224,19 @@ function Input({ theme, setData, setActive, setNoC }) {
           </button>
         </form>
         <ul className={`input_elements ${theme}`} ref={newElement}>
-          {/* <li tabIndex="0">boy</li>
-          <li tabIndex="0">boy</li>
-          <li tabIndex="0">boy</li> */}
+          {inputElements.length > 0 &&
+            inputElements.map((inputElement) => {
+              const elementName = inputElement.name.common;
+              const elementCountry = inputElement.cca3;
+
+              return (
+                <li key={elementName}>
+                  <button onClick={() => liRouteHandler(elementCountry)} id="l1_btn">
+                    {elementName}
+                  </button>
+                </li>
+              );
+            })}
         </ul>
       </div>
       <div className={`skeleton-list-filter ${theme}`}>

@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "./components.css";
+import { scrollToTop } from "../Pages/Home/Home";
 export const numberWithCommas = (number) => {
   return number.toLocaleString();
 };
@@ -18,6 +19,7 @@ function Card({
   const navigate = useNavigate();
   function routeHandler() {
     navigate(`/country/${routeLocation}`);
+    scrollToTop()
   }
   useEffect(() => {
     setCountryName(name);

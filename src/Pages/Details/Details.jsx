@@ -5,6 +5,7 @@ import dc from './Details.module.css'
 import DetailsSkeleton from "../../Components/DetailsSkeleton";
 import DetailsMain from "../../Components/DetailsMain";
 import { useParams } from "react-router-dom";
+import { scrollToTop } from "../Home/Home";
 
 function Details() {
   const { fetchData, countryName, setCountryName, lightMode } = useContext(myContext);
@@ -23,6 +24,7 @@ function Details() {
  }, [countryData]);
   const routeHandler = () => {
     navigate("/");
+    scrollToTop()
   };
 
   const fetchDataDetails = async (code) => {

@@ -76,7 +76,7 @@
 .skeleton-list-search input:focus {
  outline: 1px solid hsl(200, 15%, 8%);
 }
-.skeleton-list-search.dark input, .skeleton-list-search.dark #search,  .skeleton-list-search.dark input::placeholder, .skeleton-list-filter.dark select, .input_elements.dark{
+.skeleton-list-search.dark input, .skeleton-list-search.dark #search,  .skeleton-list-search.dark input::placeholder, .skeleton-list-filter.dark select, .input_elements.dark li #li_btn{
     color: #fff;
 }
  #search-btn {
@@ -374,20 +374,27 @@ outline: 1px solid black;
     transition: all 0.3s ease-in-out;
 
 }
-.input_elements.dark li {
+.input_elements.dark #l1_btn {
+     color: #ffff;
     border: 1px solid hsl(208.7deg 26.44% 17.06%);
 }
-.input_elements.light li:hover, .input_elements li:focus {
+.input_elements.light #l1_btn:hover, .input_elements #l1_btn:focus {
     color: #ffff
 }
-.input_elements li:hover, .input_elements li:focus {
+.input_elements #l1_btn:hover, .input_elements #l1_btn:focus {
     background-color:  hsl(200, 15%, 8%);
     border: 1px solid hsl(200, 15%, 8%);
     
 }
 .input_elements li {
-    list-style: none;
+list-style: none;
+width: 100%;
+}
+ #l1_btn{
+    width: 100%;
     outline: none;
+    background-color: transparent;
+    text-align: left;
     font-weight: 600;
     padding: 15px 5%;
     cursor: pointer;

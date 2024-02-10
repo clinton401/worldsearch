@@ -3,6 +3,7 @@ import "./components.css";
 
 import { useNavigate } from "react-router-dom";
 import { numberWithCommas } from "./Card";
+import { scrollToTop } from "../Pages/Home/Home";
 function DetailsMain({
   theme,
   image,
@@ -27,6 +28,7 @@ function DetailsMain({
     setDetailsActive(false);
     navigate(`/country/${location}`);
     fetchDataDetails(countryCode);
+    scrollToTop()
    
   }
   function borderHandler() {

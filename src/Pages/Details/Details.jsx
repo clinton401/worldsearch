@@ -11,18 +11,22 @@ function Details() {
   const { fetchData, countryName, setCountryName, lightMode } = useContext(myContext);
   const [detailsActive, setDetailsActive] = useState(false);
   const [countryData, setCountryData] = useState('');
+  const [useEffectName, setUseEffectName] = useState('')
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Accessing the current URL
-
+useEffect(() => {
+  document.title = useEffectName
+}, [useEffectName])
   useEffect(() => {
     fetchData();
+    
   }, []); // Fetch data when component mounts
  useEffect(() => {
    window.localStorage.setItem("dts", JSON.stringify(countryData));
  }, [countryData]);
   const routeHandler = () => {
+    document.title = 'Worldsearch'
     navigate("/");
     scrollToTop()
   };
@@ -34,6 +38,7 @@ function Details() {
       if (response.ok) {
         const jsonResponse = await response.json();
         setCountryData(jsonResponse);
+        setUseEffectName(jsonResponse[0].name.common)
         setDetailsActive(true);
       } else {
         setDetailsActive(false);

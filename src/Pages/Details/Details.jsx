@@ -10,8 +10,10 @@ import { scrollToTop } from "../Home/Home";
 function Details() {
   const { fetchData, countryName, setCountryName, lightMode } = useContext(myContext);
   const [detailsActive, setDetailsActive] = useState(false);
-  const [countryData, setCountryData] = useState('');
-  const [useEffectName, setUseEffectName] = useState('')
+  const [detailsSkeletonActive, setDetailsSkeletonActive] = useState(true);
+  const [dtNotFound, setDtNotFound] = useState(false)
+  const [countryData, setCountryData] = useState([]);
+  const [useEffectName, setUseEffectName] = useState('Worldsearch')
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -30,7 +32,7 @@ useEffect(() => {
     navigate("/");
     scrollToTop()
   };
-
+console.log({countryData, useEffectName})
   const fetchDataDetails = async (code) => {
     const urlToFetch = `https://restcountries.com/v3.1/alpha/${code}`;
     try {
@@ -40,21 +42,35 @@ useEffect(() => {
         setCountryData(jsonResponse);
         setUseEffectName(jsonResponse[0].name.common)
         setDetailsActive(true);
+        setDetailsSkeletonActive(false);
+        setDtNotFound(false);
       } else {
+        
         setDetailsActive(false);
+        setDetailsSkeletonActive(false);
+        setDtNotFound(true)
+        // setTimeout(() => {
+        //   if (!countryData.length >= 1) {
+        //     console.log("fail");
+        //     setDetailsActive(false);
+        //     setDetailsSkeletonActive(false);
+        //     setDtNotFound(true);
+        //   }
+        // }, 3000);
       }
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
     fetchDataDetails(id);
+  
   }, [countryName]);
 
 
   return (
     <div className={`dt ${!lightMode ? "darkmode" : ""}`}>
+     
       <div className={dc.btn_div}>
         {" "}
         <button onClick={routeHandler} id="button">
@@ -73,7 +89,7 @@ useEffect(() => {
       </div>
 
       <section className={dc.dt_section}>
-        {detailsActive ? (
+        {detailsActive && (
           <DetailsMain
             theme={lightMode ? "light" : "dark"}
             name={countryData[0].name.common}
@@ -88,6 +104,8 @@ useEffect(() => {
             currency={countryData[0].area}
             td={countryData[0].tld}
             setDetailsActive={setDetailsActive}
+            setDtNotFound={setDtNotFound}
+            setDetailsSkeletonActive={setDetailsSkeletonActive}
             setCountryData={setCountryData}
             nName={
               // countryData[0].name.nativeName.eng.official
@@ -96,13 +114,21 @@ useEffect(() => {
             }
             fetchDataDetails={fetchDataDetails}
           />
-        ) : (
+        )}
+        {detailsSkeletonActive && (
           // <h2>boy</h2>
           <DetailsSkeleton theme={lightMode ? "light" : "dark"} />
         )}
       </section>
-
-      {/* ... rest of your JSX */}
+      {dtNotFound && (
+        <section className={`dt_notfound ${!lightMode ? "darkmode" : ""}`}>
+          <h2> PAGE NOT FOUND</h2>
+          <p>
+            The page you are looking for might have been removed 
+            had its name changes or is temporary unavailable{" "}
+          </p>
+        </section>
+      )}
     </div>
   );
 }

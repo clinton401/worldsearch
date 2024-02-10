@@ -19,6 +19,8 @@ function DetailsMain({
   languages,
   setCountryName,
   setDetailsActive,
+  setDtNotFound,
+  setDetailsSkeletonActive,
   setCountryData,
   fetchDataDetails,
 }) {
@@ -26,6 +28,8 @@ function DetailsMain({
 
   async function fetchNewDetails(countryCode, location) {
     setDetailsActive(false);
+    setDetailsSkeletonActive(true);
+    setDtNotFound(false)
     navigate(`/country/${location}`);
     fetchDataDetails(countryCode);
     scrollToTop()

@@ -32,7 +32,7 @@ useEffect(() => {
     navigate("/");
     scrollToTop()
   };
-console.log({countryData, useEffectName})
+
   const fetchDataDetails = async (code) => {
     const urlToFetch = `https://restcountries.com/v3.1/alpha/${code}`;
     try {
@@ -49,16 +49,12 @@ console.log({countryData, useEffectName})
         setDetailsActive(false);
         setDetailsSkeletonActive(false);
         setDtNotFound(true)
-        // setTimeout(() => {
-        //   if (!countryData.length >= 1) {
-        //     console.log("fail");
-        //     setDetailsActive(false);
-        //     setDetailsSkeletonActive(false);
-        //     setDtNotFound(true);
-        //   }
-        // }, 3000);
+       
       }
     } catch (error) {
+        setDetailsActive(false);
+        setDetailsSkeletonActive(false);
+        setDtNotFound(true);
       console.log(error);
     }
   };
